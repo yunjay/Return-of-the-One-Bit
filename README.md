@@ -10,11 +10,11 @@ On a black-and-white two color system, shades of grey can be represented in a po
 
 This program showcases implementations of the following dithering methods.
 
-![Untitled](Return%20of%20the%20One%20Bit%2004ccfb9eb72e4258a433543218e02ac6/Untitled.png)
+![Untitled](images/ditheringMethods.png)
 
 ### Ordered Dithering
 
-![Untitled](Return%20of%20the%20One%20Bit%2004ccfb9eb72e4258a433543218e02ac6/Untitled%201.png)
+![Untitled](images/bayerScale.png)
 
 ### Temporal Connection
 
@@ -22,7 +22,9 @@ This program showcases implementations of the following dithering methods.
 
 Written in C++ using OpenGL and GLFW3.
 
-Used IMGUI for interface purposes.
+Used ImGui for interface purposes.
+
+Used Assimp for loading 3D models.
 
 Built using vcpkg on Windows.
 
