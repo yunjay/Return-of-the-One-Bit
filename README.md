@@ -28,4 +28,4 @@ Built using vcpkg on Windows.
 
 ## References
 
-All images and algorithms are referenced from [wikipedia](https://en.wikipedia.org/wiki/Dither#Algorithms)
+All images and algorithms are referenced from [wikipedia](https://en.wikipedia.org/wiki/Dither#Algorithms).
