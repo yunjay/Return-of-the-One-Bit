@@ -11,9 +11,8 @@
 #include <iostream>
 #include <string>
 
-#include "loadShader.h"
-#include "yjReader.h"
-#include "smoothing.h"
+#include "ShaderLoader.h"
+#include "Mesh.h"
 
 using std::cout;
 // settings
@@ -29,24 +28,17 @@ float lastFrame = 0.0f;
 
 int main()
 {
-    //xOn = false;
-
-
-    // glfw: initialize and configure
+    // glfw: init and configure
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-#ifdef __APPLE__
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-#endif
-
     // glfw window creation
     GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Return of The One Bit", NULL, NULL);
     if (window == NULL)
     {
-        cout << "Failed to createwindow\n";
+        cout << "Failed to create window.\n";
         glfwTerminate();
         return -1;
     }
@@ -54,7 +46,7 @@ int main()
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
-    // glad: load all OpenGL function pointers]
+    // glad: loads all OpenGL function pointers
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
         std::cout << "Failed to initialize GLAD" << std::endl;

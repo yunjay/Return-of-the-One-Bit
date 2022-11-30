@@ -30,3 +30,12 @@
 *.exe
 *.out
 *.app
+.vs/ReturnOfTheOneBit/FileContentIndex/read.lock
+*.vsidx
+*.db
+.vs/ReturnOfTheOneBit/v17/.suo
+*.db-shm
+*.db-wal
+*.ipch
+.vs/ReturnOfTheOneBit/v17/fileList.bin
+*.opendb
