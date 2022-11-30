@@ -72,7 +72,7 @@ class Model {
 		}
 		Model(std::string p){
 			this->path=p;
-			
+			loadAssimp(this->path);			
 		}
 	private:
 		bool loadAssimp(std::string const path){
@@ -88,25 +88,33 @@ class Model {
 			std::vector<glm::vec3> tempVertices;
 			std::vector<glm::vec3> tempNormals;
 			std::vector<unsigned int> tempIndices;
-			for (unsigned int i = 0; i < scene->mNumMeshes; i++){
-				aiMesh* mesh = scene->mMeshes[i];
-				meshes.push_back(Mesh(tempVertices,tempNormals,tempIndices));
+			for (unsigned int meshId = 0; meshId < scene->mNumMeshes; meshId++){
+				aiMesh* mesh = scene->mMeshes[meshId];
 
-				//
-				for (unsigned int j = 0; j < mesh->mNumVertices; i++) {
+				//vertice positions
+				for (unsigned int i = 0; i < mesh->mNumVertices; i++) {
 					aiVector3D pos = mesh->mVertices[i];
 					tempVertices.push_back(glm::vec3(pos.x, pos.y, pos.z));
 				}
+				//normals
+				for (unsigned int i = 0; i < mesh->mNumVertices; i++) {
+					aiVector3D n = mesh->mNormals[i];
+					tempNormals.push_back(glm::normalize(glm::vec3(n.x, n.y, n.z)));
+				}
+				//indices
+				for (unsigned int i = 0; i < mesh->mNumFaces; i++) {
+					for (unsigned int j = 0; j < mesh->mFaces[i].mNumIndices; j++)
+						tempIndices.push_back(mesh->mFaces[i].mIndices[j]);
+				}
 
-
-
-				//
+				//push to model
+				this->meshes.push_back(Mesh(tempVertices,tempNormals,tempIndices));
 
 				tempVertices.clear();
 				tempNormals.clear();
 				tempIndices.clear();
 			}
 
-
+			return true;
 		}
 };
