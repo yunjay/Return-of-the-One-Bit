@@ -46,4 +46,11 @@
 *.ilk
 *.recipe
 *.txt
+<<<<<<< Updated upstream
 .vscode/settings.json
+=======
+ReturnOfTheOneBit.vcxproj
+ReturnOfTheOneBit.vcxproj.filters
+>>>>>>> Stashed changes
+ReturnOfTheOneBit.vcxproj.filters
+ReturnOfTheOneBit.vcxproj
