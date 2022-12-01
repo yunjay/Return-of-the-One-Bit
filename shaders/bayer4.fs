@@ -28,11 +28,4 @@ void main() {
     //ambient
     diff+=0.08f;
 
-    //per pixel random threshold
-    vec2 coord = gl_FragCoord.xy/resolution.xy;
-    float randomThreshold = random( coord );
-    
-    if(diff>randomThreshold)color = vec4(highColor,1.0f);
-    else color = vec4(lowColor,1.0f);
-
 }

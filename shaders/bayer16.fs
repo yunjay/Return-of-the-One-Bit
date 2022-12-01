@@ -25,7 +25,7 @@ float ditherIndex() { //value from dither matrix
     //glsl mod function for % as % is not implemented as an operator is glsl
     int column = int(mod(gl_FragCoord.x, 4));
     int row = int(mod(gl_FragCoord.y, 4));
-    return bayer16[(column + 4 * row)] / 16.0;
+    return bayer16[ column + 4 * row ] / 16.0;
 }
 void main() {
     //diffuse
@@ -35,7 +35,7 @@ void main() {
     float diffuse = diffuseScale * max(dot(normal, lightDir), 0.0); //cos
     
     //ambient
-    diffuse+=0.08f;
+    diffuse += 0.08f;
 
     //decide color
     vec3 closeColor;
