@@ -14,11 +14,16 @@ uniform vec2 resolution;
 
 uniform float diffuseScale;
 //threshold map
-const int bayer16[16] = int[16](0,  8,  2,  10, 12, 4,  14, 6, 3,  11, 1,  9, 15, 7,  13, 5);
-float ditherIndex() { //value from dither matrix
+const int bayer16[16] = int[16](0,  8,  2,  10, 
+                                12, 4,  14, 6, 
+                                3,  11, 1,  9, 
+                                15, 7,  13, 5);
+float ditherIndex() { 
+    //value from dither matrix
     //also uses gl_FragCoord
     //gl_FragCoord % 4 to split the screen into blocks for 4x4 squares
     //glsl mod function for % as % is not implemented as an operator is glsl
+    
     int column = int(mod(gl_FragCoord.x, 4));
     int row = int(mod(gl_FragCoord.y, 4));
     return (bayer16[ (column + 4 * row) ] / 16.0);
@@ -31,7 +36,7 @@ void main() {
     float diffuse = diffuseScale * max(dot(normal, lightDir), 0.0); //cos
     
     //ambient
-    diffuse += 0.08f;
+    diffuse = diffuse+0.08;
 
     //decide color
     vec3 closeColor;
