@@ -24,7 +24,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 //camera
 glm::vec3 cameraFront = glm::vec3(0.0, 0.0, -1.0);
 glm::vec3 cameraUp = glm::vec3(0.0, 1.0, 0.0);
-glm::vec3 cameraPos = glm::vec3(0.0, 0.0, 1.0);
+glm::vec3 cameraPos = glm::vec3(0.0, 0.5f, 1.0);
 glm::vec3 cameraLeft = glm::normalize(glm::cross(cameraUp,cameraFront));
 GLfloat yaw = -90.0f;
 GLfloat pitch = 0.0f;
@@ -92,8 +92,8 @@ int main()
     lucy.setPosition(glm::vec3(-4.0f, 0.0f, 2.0f));
     dragon.setPosition(glm::vec3(-2.0f, 0.0f, 2.0f));
     bunny.setPosition(glm::vec3(0.0f, 0.0f, 2.0f)); 
-    boat.setPosition(glm::vec3(2.0f, 0.0f, 2.0f));
-    teapot.setPosition(glm::vec3(4.0f, 0.0f, 2.0f));
+    boat.setPosition(glm::vec3(1.0f, 0.0f, 2.0f));
+    teapot.setPosition(glm::vec3(2.0f, 0.0f, 2.0f));
 
     std::vector<Model*> models;
     models.push_back(&bunny);
@@ -121,6 +121,7 @@ int main()
     //view
     //light settings
     glm::vec3 lightPos = glm::vec3(-6.0f, 10.0f, -6.0f);
+    //directional light
 
     //render loop
     while (!glfwWindowShouldClose(window))
