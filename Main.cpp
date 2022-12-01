@@ -34,7 +34,7 @@ GLfloat pitch = 0.0f;
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 
-// User
+// User parameters
 glm::vec3 lowColor(51.0f/255.0f, 51.0f/255.0f, 23.0f/255.0f);
 glm::vec3 highColor(229.0f/255.0f, 1.0f, 1.0f);
 float lightDegrees=0.0f;
@@ -92,7 +92,7 @@ int main()
     Model teapot("./models/teapot.obj");
     Model boat("./models/Boat.obj");
     
-    lucy.setPosition(glm::vec3(-5.0f, 0.0f, 2.0f) - lucy.scale * lucy.minBoxPoint);
+    lucy.setPosition(glm::vec3(-5.0f, 0.2f, 2.0f) - lucy.scale * lucy.minBoxPoint);
     dragon.setPosition(glm::vec3(-4.0f, 0.0f, 0.0f)- dragon.scale * dragon.minBoxPoint);
     bunny.setPosition(glm::vec3(0.0f, 0.0f, 2.0f)-bunny.scale * bunny.minBoxPoint); 
     boat.setPosition(glm::vec3(5.0f, 0.0f, -0.5f)-boat.scale * boat.minBoxPoint);
@@ -156,20 +156,12 @@ int main()
         //IMGui window
         ImGui::Begin("Return of The One Bit");
 
-        /*
-        ImGui::SliderFloat("Rotate X", &xDegrees, 0.0f, 360.0f);
-        ImGui::SliderFloat("Rotate Y", &yDegrees, 0.0f, 360.0f);
-        ImGui::SliderFloat("Model Size", &modelSize, 0.05f, 500.0f);
-        //ImGui::SliderFloat("Brightness", &diffuse, 0.0f, 2.0f);
-        ImGui::SliderInt("Number of Smoothing Scales", &scales, 1, 19);
-        ImGui::SliderFloat("Contribution factor of ki", &contributionScale, -5.0f, 5.0f);
-        ImGui::SliderFloat("Light by scale clamp coefficient", &clampCoef, 1.0f, 1000.0f);
-        ImGui::SliderFloat("Ambient", &ambient, 0.0f, 1.0f);
-        */
         static int shaderItem = 0;
         ImGui::ListBox("Dithering Method", &shaderItem, shaderNames, IM_ARRAYSIZE(shaderNames), 4);
         currentShader = shaders[shaderItem];
         ImGui::SliderFloat("Rotate Light Direction", &lightDegrees, 0.0f, 360.0f);
+        ImGui::Checkbox("Auto Rotate Light Source", &autoRotate);
+
 
         ImGuiColorEditFlags misc_flags = (0 | ImGuiColorEditFlags_NoDragDrop | 0 | ImGuiColorEditFlags_NoOptions);
         ImGui::ColorEdit3("Low Color (Black)", (float*)&lowColor, misc_flags);
@@ -182,7 +174,7 @@ int main()
         //Uniforms
         glm::mat4 lightRotate = glm::rotate(glm::mat4(1), glm::radians(lightDegrees), glm::vec3(0.0f, 1.0f, 0.0f));
         lightPos = glm::vec3(lightRotate*glm::vec4(lightPosInit,0.0f));
-
+        if (autoRotate) {lightDegrees += deltaTime * 1.0f;}
         glUseProgram(*currentShader);
 
         glUniform3f(glGetUniformLocation(*currentShader, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
