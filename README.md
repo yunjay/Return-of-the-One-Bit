@@ -49,17 +49,17 @@ Screenshot from Program :
 ### Bayer Dithering
 
 
-Screenshot from Program (Using 4x4 Bayer Matrix):
+Screenshot from Program (Using 2x2 Bayer Matrix):
 
 ![Bayer4x4](images/bayer4.png)
 
 
-Screenshot from Program (Using 16x16 Bayer Matrix):
+Screenshot from Program (Using 4x4 Bayer Matrix):
 
 ![Bayer16x16](images/bayer16.png)
 
 
-Screenshot from Program (Using 64x64 Bayer Matrix):
+Screenshot from Program (Using 8x8 Bayer Matrix):
 
 ![Bayer64x64](images/bayer64.png)
 

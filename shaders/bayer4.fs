@@ -1,25 +1,38 @@
-in float color;
-out vec4 frag_color;
+#version 430
 
-const int indexMatrix4x4[16] = int[](0,  8,  2,  10,
+in vec3 Normal;
+in vec3 FragPos;
+
+out vec4 color;
+
+uniform vec3 lightPos;
+uniform vec3 viewPos;
+uniform vec3 highColor;
+uniform vec3 lowColor;
+
+uniform vec2 resolution;
+
+uniform float diffuseScale;
+
+const int bayer4[16] = int[](0,  8,  2,  10,
                                      12, 4,  14, 6,
                                      3,  11, 1,  9,
                                      15, 7,  13, 5);
+void main() {
+    //diffuse
+    vec3 normal = normalize(Normal);
+    //vec3 lightDir = normalize(lightPos - FragPos);
+    vec3 lightDir = normalize(lightPos);
+    float diff = diffuseScale * max(dot(normal, lightDir), 0.0); //cos
+    
+    //ambient
+    diff+=0.08f;
 
-float indexValue() {
-    int x = int(mod(gl_FragCoord.x, 4));
-    int y = int(mod(gl_FragCoord.y, 4));
-    return indexMatrix4x4[(x + y * 4)] / 16.0;
-}
+    //per pixel random threshold
+    vec2 coord = gl_FragCoord.xy/resolution.xy;
+    float randomThreshold = random( coord );
+    
+    if(diff>randomThreshold)color = vec4(highColor,1.0f);
+    else color = vec4(lowColor,1.0f);
 
-float dither(float color) {
-    float closestColor = (color < 0.5) ? 0 : 1;
-    float secondClosestColor = 1 - closestColor;
-    float d = indexValue();
-    float distance = abs(closestColor - color);
-    return (distance < d) ? closestColor : secondClosestColor;
-}
-
-void main () {
-    fragColor = vec4(vec3(dither(color)), 1);
 }
