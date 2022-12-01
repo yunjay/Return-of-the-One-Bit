@@ -42,7 +42,8 @@ void main() {
     float otherColor;
     if(diffuse>0.5) {
         closeColor=highColor;
-        otherColor=lowColor}
+        otherColor=lowColor;
+    }
     else{
         closeColor=lowColor;
         otherColor=highColor;
