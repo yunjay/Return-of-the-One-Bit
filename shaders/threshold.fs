@@ -15,7 +15,8 @@ void main() {
     vec3 normal = normalize(Normal);
     vec3 lightDir = normalize(lightPos - FragPos);
     float diff = max(dot(normal, lightDir), 0.0); //cos
-    if(diff>0.5)color = highColor;
-    else color = lowColor;
+
+    if(diff>0.5f)color = vec4(highColor,1.0f);
+    else color = vec4(lowColor,1.0f);
 
 }

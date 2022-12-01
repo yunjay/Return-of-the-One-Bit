@@ -26,7 +26,7 @@ void main() {
     vec2 coord = gl_FragCoord.xy/resolution.xy;
     float randomThreshold = random( coord );
     
-    if(diff>randomThreshold)color = highColor;
-    else color = lowColor;
+    if(diff>randomThreshold)color = vec4(highColor,1.0f);
+    else color = vec4(lowColor,1.0f);
 
 }
