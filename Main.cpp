@@ -92,7 +92,7 @@ int main()
     Model boat("./models/Boat.obj");
 
     
-    lucy.setPosition(glm::vec3(-4.0f, 0.0f, 0.0f));
+    lucy.setPosition(glm::vec3(-4.0f, 0.0f, 0.0f)-lucy.minBoxPoint);
     dragon.setPosition(glm::vec3(-2.0f, 0.0f, 0.0f));
     bunny.setPosition(glm::vec3(0.0f, 0.0f, 0.0f)); 
     boat.setPosition(glm::vec3(1.0f, 0.0f, 0.0f));
@@ -124,7 +124,8 @@ int main()
 
     //view
     //light settings
-    glm::vec3 lightPos = glm::vec3(-1.0f, 1.0f, 0.5f);
+    glm::vec3 lightPosInit = glm::vec3(-1.0f, 1.0f, 0.5f);
+    glm::vec3 lightPos = lightPostInit;
     //directional light
 
     //render loop
@@ -164,7 +165,6 @@ int main()
         ImGui::ListBox("Dithering Method", &shaderItem, shaderNames, IM_ARRAYSIZE(shaderNames), 4);
         currentShader = shaders[shaderItem];
         ImGui::SliderFloat("Rotate Light Direction", &lightDegrees, 0.0f, 360.0f);
-        ImGui::Checkbox("Exaggerated Shading", &autoRotate);
 
         ImGuiColorEditFlags misc_flags = (0 | ImGuiColorEditFlags_NoDragDrop | 0 | ImGuiColorEditFlags_NoOptions);
         ImGui::ColorEdit3("Low Color (Black)", (float*)&lowColor, misc_flags);
@@ -176,7 +176,7 @@ int main()
 
         //Uniforms
         glm::mat4 lightRotate = glm::rotate(glm::mat4(1), glm::radians(lightDegrees), glm::vec3(0.0f, 1.0f, 0.0f));
-        lightPos = glm::vec3(lightRotate*glm::vec4(lightPos,0.0f));
+        lightPos = glm::vec3(lightRotate*glm::vec4(lightPosInit,0.0f));
 
         glUseProgram(*currentShader);
 
