@@ -19,7 +19,14 @@ Graphic interface used with mouse.
 
 Choose between dithering methods.
 
-Dithering Methods : Bayer 8x8 Dithering, Bayer 4x4 Dithering, Bayer 2x2 Dithering, Halftone Dithering, Random Threshold Dithering, Threshold Dithering, "Original" - Multi-colored Blinn-Phong rendering (Not two tone).
+Dithering Methods : 
+- Bayer 8x8 Dithering
+- Bayer 4x4 Dithering
+- Bayer 2x2 Dithering
+- Halftone Dithering
+- Random Threshold Dithering
+- Threshold Dithering
+- "Original" - Spectrum colored Blinn-Phong rendering (Does not use a binary color scheme.).
 
 ![ChooseMethods](images/chooseMethods.gif)
 
@@ -41,20 +48,18 @@ In a actual one-bit black and white rendering system, the high color would be wh
 
 On a black-and-white two color system, shades of grey can be expressed in a pointillistic matter by juxtaposition of black and white pixels. This is a technique originating from newspapers and the printing industry.
 
-This program showcases implementations of the following dithering methods.
-
 ![DitheringMethods](images/ditheringMethods.png)
 
 ### Threshold and Random Dithering
 
-Threshold dithering is a method that compares each pixel value against a fixed threshold. If the value is larger than the threshold value the pixel falue is set to high, and if it is lower than the threshold value the pixel value is set to low. (In a two color system.)
+**Threshold dithering** is a method that compares each pixel value against a fixed threshold. If the value is larger than the threshold value the pixel falue is set to high, and if it is lower than the threshold value the pixel value is set to low. (In a two color system.)
 
 
 Screenshot from Program : 
 
 ![Threshold](images/threshold.png)
 
-Random dithering, the first method made to improve threshold dithering, decides pixel values by making the threshold value random at each pixel. Random dithering produces a very noisy image.
+**Random dithering**, the first method made to improve threshold dithering, decides pixel values by making the threshold value random at each pixel. Random dithering produces a very noisy image.
 
 
 Screenshot from Program :
@@ -63,7 +68,7 @@ Screenshot from Program :
 
 ## Ordered Dithering
 
-Ordered dithering dithers using a *dither matrix*. For each pixel, the value of the pattern at the corresponding location is used as a threshold for the pixel.
+**Ordered dithering** dithers using a *dither matrix*. For each pixel, the value of the pattern at the corresponding location is used as a threshold for the pixel.
 
 Below is a scale exemplifying how shades of grey are expressed by ordered dither patterns.
 
@@ -71,7 +76,7 @@ Below is a scale exemplifying how shades of grey are expressed by ordered dither
 
 ### Halftone Dithering
 
-A halftone-like effect can be achieved from a center circle focused dither matrix.
+A **halftone**-like effect can be achieved from a center circle focused dither matrix.
 
 Screenshot from Program :
 
@@ -79,22 +84,22 @@ Screenshot from Program :
 
 ### Bayer Dithering
 
-The following matrices are used for different sizes of bayer threshold matrices.
+The following matrices are used for different sizes of ordered (Bayer) threshold matrices.
 
 ![BayerMatrices](images/bayerMatrices.png)
 
 
-Screenshot from Program (Using 2x2 Bayer Matrix):
+Screenshot from Program Using 2x2 Bayer Matrix :
 
 ![Bayer4x4](images/bayer2x2.png)
 
 
-Screenshot from Program (Using 4x4 Bayer Matrix):
+Screenshot from Program Using 4x4 Bayer Matrix :
 
 ![Bayer16x16](images/bayer4x4.png)
 
 
-Screenshot from Program (Using 8x8 Bayer Matrix):
+Screenshot from Program Using 8x8 Bayer Matrix :
 
 ![Bayer64x64](images/bayer8x8.png)
 
