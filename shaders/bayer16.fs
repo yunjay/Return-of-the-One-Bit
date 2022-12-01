@@ -14,7 +14,7 @@ uniform vec2 resolution;
 
 uniform float diffuseScale;
 //threshold map
-const int bayer16[16] = int[](0,  8,  2,  10,
+const int bayer16[16] = int[16](0,  8,  2,  10,
                             12, 4,  14, 6,
                             3,  11, 1,  9,
                             15, 7,  13, 5);
