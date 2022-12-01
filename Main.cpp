@@ -24,7 +24,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 //camera
 glm::vec3 cameraFront = glm::vec3(0.0, 0.0, -1.0);
 glm::vec3 cameraUp = glm::vec3(0.0, 1.0, 0.0);
-glm::vec3 cameraPos = glm::vec3(0.0, 0.6f, 2.0);
+glm::vec3 cameraPos = glm::vec3(0.0, 0.8f, 5.0);
 glm::vec3 cameraLeft = glm::normalize(glm::cross(cameraUp,cameraFront));
 GLfloat yaw = -90.0f;
 GLfloat pitch = 0.0f;
@@ -92,11 +92,11 @@ int main()
     Model teapot("./models/teapot.obj");
     Model boat("./models/Boat.obj");
     
-    lucy.setPosition(glm::vec3(-4.0f, 0.0f, 0.0f) - lucy.scale * lucy.minBoxPoint);
-    dragon.setPosition(glm::vec3(-3.0f, 0.0f, 1.0f)- dragon.scale * dragon.minBoxPoint);
-    bunny.setPosition(glm::vec3(0.0f, 0.0f, 0.0f)-bunny.scale * bunny.minBoxPoint); 
+    lucy.setPosition(glm::vec3(-5.0f, 0.0f, 2.0f) - lucy.scale * lucy.minBoxPoint);
+    dragon.setPosition(glm::vec3(-4.0f, 0.0f, 0.0f)- dragon.scale * dragon.minBoxPoint);
+    bunny.setPosition(glm::vec3(0.0f, 0.0f, 2.0f)-bunny.scale * bunny.minBoxPoint); 
     boat.setPosition(glm::vec3(5.0f, 0.0f, -0.5f)-boat.scale * boat.minBoxPoint);
-    teapot.setPosition(glm::vec3(2.0f, 0.0f, 1.0f)-teapot.scale * teapot.minBoxPoint);
+    teapot.setPosition(glm::vec3(2.0f, 0.0f, 2.0f)-teapot.scale * teapot.minBoxPoint);
     
     bunny.setScale(1.5f*bunny.scale);
     dragon.setScale(1.5f*dragon.scale);
