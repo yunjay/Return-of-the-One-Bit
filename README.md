@@ -3,9 +3,6 @@
 
 3D rendering showcase of dithering shaders inspired by the game *Return of the Obra Dinn* by Lucas Pope, which features two-color dithering graphics.
 
-
-![Demo](images/demo.gif)
-
 ## Features
 
 ![Interface](images/interface.gif)
@@ -84,7 +81,7 @@ Screenshot from Program :
 
 The following matrices are used for different sizes of bayer threshold matrices.
 
-![BayerMatrices](images/bayerMatrices.png | width=200)
+![BayerMatrices](images/bayerMatrices.png)
 
 
 Screenshot from Program (Using 2x2 Bayer Matrix):
