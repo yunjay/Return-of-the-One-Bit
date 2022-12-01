@@ -89,11 +89,11 @@ int main()
     Model boat("./models/Boat.obj");
 
     
-    lucy.setPosition(glm::vec3(-2.0f, 0.0f, 2.0f));
-    dragon.setPosition(glm::vec3(-1.0f, 0.0f, 2.0f));
+    lucy.setPosition(glm::vec3(-4.0f, 0.0f, 2.0f));
+    dragon.setPosition(glm::vec3(-2.0f, 0.0f, 2.0f));
     bunny.setPosition(glm::vec3(0.0f, 0.0f, 2.0f)); 
-    boat.setPosition(glm::vec3(1.0f, 0.0f, 2.0f));
-    teapot.setPosition(glm::vec3(2.0f, 0.0f, 2.0f));
+    boat.setPosition(glm::vec3(2.0f, 0.0f, 2.0f));
+    teapot.setPosition(glm::vec3(4.0f, 0.0f, 2.0f));
 
     std::vector<Model*> models;
     models.push_back(&bunny);
