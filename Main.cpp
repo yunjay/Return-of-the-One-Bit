@@ -16,8 +16,8 @@
 
 using std::cout;
 // settings
-const unsigned int SCR_WIDTH = 1200;
-const unsigned int SCR_HEIGHT = 800;
+unsigned int SCR_WIDTH = 1200;
+unsigned int SCR_HEIGHT = 800;
 float cameraSpeed = 2.0f;
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
@@ -108,8 +108,8 @@ int main()
     GLuint bayer4 = loadShader("./shaders/vertex.vs", "./shaders/.fs");
     GLuint halftone = loadShader("./shaders/vertex.vs", "./shaders/.fs");
     GLuint voidAndCluster = loadShader("./shaders/vertex.vs", "./shaders/.fs");
-    GLuint random = loadShader("./shaders/vertex.vs", "./shaders/.fs");
-    GLuint threshold = loadShader("./shaders/vertex.vs", "./shaders/.fs");
+    GLuint random = loadShader("./shaders/vertex.vs", "./shaders/random.fs");
+    GLuint threshold = loadShader("./shaders/vertex.vs", "./shaders/threshold.fs");
     GLuint original = loadShader("./shaders/vertex.vs", "./shaders/original.fs");
     
     GLuint *shaders[] = { &bayer64, &bayer16, &bayer4, &halftone, &voidAndCluster, &random, &threshold, &original };
@@ -178,6 +178,7 @@ int main()
             glUniform3f(glGetUniformLocation(*currentShader, "lowColor"), lowColor.x, lowColor.y, lowColor.z);
             glUniform3f(glGetUniformLocation(*currentShader, "highColor"), highColor.x, highColor.y, highColor.z);
 
+            glUniform2f(glGetUniformLocation(*currentShader, "resolution"), SCR_WIDTH, SCR_HEIGHT);
 
 
             //opengl matrices are applied from the right side. (last first)
