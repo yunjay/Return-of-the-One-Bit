@@ -85,12 +85,12 @@ int main()
     glClearColor(30.0 / 255, 30.0 / 255, 30.0 / 255, 0.0); //background
 
     //Load Models
+    Model floor("./models/floor.obj");
     Model bunny("./models/stanford-bunny.obj");
     Model lucy("./models/lucy.obj");
     Model dragon("./models/xyzrgb_dragon.obj");
     Model teapot("./models/teapot.obj");
     Model boat("./models/Boat.obj");
-    Model floor("./models/floor.obj");
     
     lucy.setPosition(glm::vec3(-5.0f, 0.0f, 0.0f) - lucy.scale * lucy.minBoxPoint);
     dragon.setPosition(glm::vec3(-3.0f, 0.0f, 0.0f)- dragon.scale * dragon.minBoxPoint);
@@ -100,7 +100,7 @@ int main()
     
     bunny.setScale(1.5f*bunny.scale);
 
-    floor.diffuseScale = 0.5f;
+    floor.diffuseScale = 0.51f;
 
     std::vector<Model*> models;
     models.push_back(&floor);
@@ -204,8 +204,13 @@ int main()
             glm::mat4 projection = glm::perspective(glm::radians(60.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 
             //floor lucy dragon bunny boat teapot
-            if (i == 1) {}
-            else if (i == 2) {
+            if (i == 1){ //lucy
+                model= glm::rotate(model,glm::radians(90.0f),glm::vec3(1.0f,0.0f,0.0f));
+            }
+            else if (i == 2){
+            }
+            else if (i==4){ //boat
+                model=glm::rotate(model,glm::radians(90.0f),glm::vec3(0.0f,1.0f,0.0f));
             }
 
 
