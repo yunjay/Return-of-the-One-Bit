@@ -61,3 +61,4 @@ x64/Debug/imgui_impl_opengl3.obj
 x64/Debug/imgui_tables.obj
 x64/Debug/imgui_widgets.obj
 x64/Debug/Main.obj
+.DS_Store

@@ -73,7 +73,7 @@ class Model {
 	public:	
 		std::string path;
 		std::vector<Mesh> meshes;
-		glm::vec3 position = glm::vec3(0.0,0.0,-1.0);
+		glm::vec3 position = glm::vec3(0.0,0.0,0.0);
 		GLfloat scale;
 		glm::vec3 maxBoxPoint;
 		glm::vec3 minBoxPoint;

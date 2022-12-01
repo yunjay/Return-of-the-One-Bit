@@ -90,7 +90,7 @@ int main()
     Model dragon("./models/xyzrgb_dragon.obj");
     Model teapot("./models/teapot.obj");
     Model boat("./models/Boat.obj");
-
+    Model floor("./models/floor.obj")
     
     lucy.setPosition(glm::vec3(-5.0f, 0.0f, 0.0f) - lucy.scale * lucy.minBoxPoint);
     dragon.setPosition(glm::vec3(-3.0f, 0.0f, 0.0f)- dragon.scale * dragon.minBoxPoint);
@@ -98,7 +98,9 @@ int main()
     boat.setPosition(glm::vec3(2.0f, 0.0f, 0.0f)-boat.scale * boat.minBoxPoint);
     teapot.setPosition(glm::vec3(4.0f, 0.0f, 0.0f)-teapot.scale * teapot.minBoxPoint);
 
+
     std::vector<Model*> models;
+    models.push_back(&floor);
     models.push_back(&lucy);
     models.push_back(&dragon);
     models.push_back(&bunny);
@@ -189,7 +191,6 @@ int main()
 
         //iterate models
         for (int i = 0; i < models.size(); i++) {
-            
 
 
             //opengl matrices are applied from the right side. (last first)
@@ -199,9 +200,9 @@ int main()
             glm::mat4 view = glm::lookAt(cameraPos, cameraPos+cameraFront, cameraUp);
             glm::mat4 projection = glm::perspective(glm::radians(60.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 
-            //lucy dragon bunny boat teapot
-            if (i == 0) {}
-            else if (i == 1) {
+            //floor lucy dragon bunny boat teapot
+            if (i == 1) {}
+            else if (i == 2) {
             }
 
 
