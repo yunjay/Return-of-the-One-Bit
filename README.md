@@ -27,7 +27,7 @@ Dithering Methods : Bayer 8x8 Dithering, Bayer 4x4 Dithering, Bayer 2x2 Ditherin
 
 2. Light Direction and Rotation
 
-Slider for rotating the light direction (location of the light source), and an option for auto-rotation of the light source.
+Slider for rotating the light direction (location of the light source), and a checkbox option for auto-rotation of the light source.
 
 ![lightRotation](images/lightRotation.gif)
 
@@ -35,7 +35,7 @@ Slider for rotating the light direction (location of the light source), and an o
 
 Customizable high color and low color for the two-color "one bit" shading.
 
-In a black and white actual one-bit rendering system, the high color would be white, as in 1, and the low color would be black, or 0.
+In a actual one-bit black and white rendering system, the high color would be white, as in 1, and the low color would be black, or 0.
 
 ![chooseColors](images/chooseColors.gif)
 
@@ -75,8 +75,6 @@ Below is a scale exemplifying how shades of grey are expressed by ordered dither
 
 A halftone-like effect can be achieved from a center circle focused dither matrix.
 
-Method from Gomes, Jonas. *Image Processing for Computer Graphics*, 1997.
-
 Screenshot from Program :
 
 ![Halftone](images/halftone.png)
@@ -90,17 +88,17 @@ The following matrices are used for different sizes of bayer threshold matrices.
 
 Screenshot from Program (Using 2x2 Bayer Matrix):
 
-![Bayer4x4](images/bayer4.png)
+![Bayer4x4](images/bayer2x2.png)
 
 
 Screenshot from Program (Using 4x4 Bayer Matrix):
 
-![Bayer16x16](images/bayer16.png)
+![Bayer16x16](images/bayer4x4.png)
 
 
 Screenshot from Program (Using 8x8 Bayer Matrix):
 
-![Bayer64x64](images/bayer64.png)
+![Bayer64x64](images/bayer8x8.png)
 
 ## Dependencies
 
@@ -117,3 +115,5 @@ Built using vcpkg on Windows.
 Images and algorithms are referenced from [wikipedia](https://en.wikipedia.org/wiki/Dither#Algorithms).
 
 3D models from [common-3D-test-models](https://github.com/alecjacobson/common-3d-test-models) uploaded by alecjacobson.
+
+Halftone dithering method from Gomes, Jonas. *Image Processing for Computer Graphics*, 1997.
