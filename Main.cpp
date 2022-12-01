@@ -100,7 +100,7 @@ int main()
     
     bunny.setScale(1.5f*bunny.scale);
     dragon.setScale(1.5f*dragon.scale);
-    floor.diffuseScale = 0.55f;
+    floor.diffuseScale = 0.4f;
 
     std::vector<Model*> models;
     models.push_back(&floor);
@@ -183,6 +183,7 @@ int main()
         glUniform3f(glGetUniformLocation(*currentShader, "highColor"), highColor.x, highColor.y, highColor.z);
 
         glUniform2f(glGetUniformLocation(*currentShader, "resolution"), SCR_WIDTH, SCR_HEIGHT);
+        //Model specific uniforms are sent in Model class methods.
 
         //iterate models to render
         for (int i = 0; i < models.size(); i++) {
@@ -205,8 +206,6 @@ int main()
             else if (i==4){ //boat
                 model=glm::rotate(model,glm::radians(90.0f),glm::vec3(0.0f,1.0f,0.0f));
             }
-
-
 
             glUniformMatrix4fv(glGetUniformLocation(*currentShader, "model"), 1, GL_FALSE, &model[0][0]);
             glUniformMatrix4fv(glGetUniformLocation(*currentShader, "view"), 1, GL_FALSE, &view[0][0]);

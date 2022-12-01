@@ -20,7 +20,7 @@ void main() {
     float diff = diffuseScale * max(dot(normal, lightDir), 0.0); //cos
 
     //ambient
-    diff+=0.05f;
+    diff+=0.08f;
 
     if(diff>0.5f)color = vec4(highColor,1.0f);
     else color = vec4(lowColor,1.0f);

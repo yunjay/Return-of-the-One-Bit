@@ -26,7 +26,7 @@ void main() {
     float diff = diffuseScale * max(dot(normal, lightDir), 0.0); //cos
     
     //ambient
-    diff+=0.1f;
+    diff+=0.08f;
 
     //per pixel random threshold
     vec2 coord = gl_FragCoord.xy/resolution.xy;

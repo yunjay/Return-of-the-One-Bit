@@ -14,7 +14,7 @@ uniform float diffuseScale;
 
 void main() {
     //ambient
-    vec3 ambient = 0.04 * highColor;
+    vec3 ambient = 0.08 * highColor;
     //diffuse
     vec3 normal = normalize(Normal);
     //vec3 lightDir = normalize(lightPos - FragPos);
