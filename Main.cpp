@@ -90,7 +90,7 @@ int main()
     Model dragon("./models/xyzrgb_dragon.obj");
     Model teapot("./models/teapot.obj");
     Model boat("./models/Boat.obj");
-    Model floor("./models/floor.obj")
+    Model floor("./models/floor.obj");
     
     lucy.setPosition(glm::vec3(-5.0f, 0.0f, 0.0f) - lucy.scale * lucy.minBoxPoint);
     dragon.setPosition(glm::vec3(-3.0f, 0.0f, 0.0f)- dragon.scale * dragon.minBoxPoint);
