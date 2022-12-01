@@ -100,7 +100,7 @@ int main()
     
     bunny.setScale(1.5f*bunny.scale);
 
-    floor.diffuseScale = 0.51f;
+    floor.diffuseScale = 0.55f;
 
     std::vector<Model*> models;
     models.push_back(&floor);
