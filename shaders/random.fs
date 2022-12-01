@@ -22,7 +22,10 @@ void main() {
     vec3 lightDir = normalize(lightPos - FragPos);
     float diff = max(dot(normal, lightDir), 0.0); //cos
     
+    //ambient
+    diff+=0.1f;
 
+    //per pixel random threshold
     vec2 coord = gl_FragCoord.xy/resolution.xy;
     float randomThreshold = random( coord );
     
