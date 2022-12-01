@@ -32,16 +32,23 @@ void main() {
     vec3 normal = normalize(Normal);
     //vec3 lightDir = normalize(lightPos - FragPos);
     vec3 lightDir = normalize(lightPos);
-    float diff = diffuseScale * max(dot(normal, lightDir), 0.0); //cos
+    float diffuse = diffuseScale * max(dot(normal, lightDir), 0.0); //cos
     
     //ambient
-    diff+=0.08f;
+    diffuse+=0.08f;
 
     //decide color
-    float closeColor = (diff < 0.5) ? lowColor : highColor ;
-    float otherColor = 1 - closeColor;
+    float closeColor;
+    float otherColor;
+    if(diffuse>0.5) {
+        closeColor=highColor;
+        otherColor=lowColor}
+    else{
+        closeColor=lowColor;
+        otherColor=highColor;
+    }
     float d = ditherIndex();
-    float dist = abs(closeColor - diff);
+    float dist = abs(closeColor - diffuse);
     return (dist < d) ? color = vec4(closeColor,1.0f) : color = vec4(otherColor,1.0f);
 
 }
