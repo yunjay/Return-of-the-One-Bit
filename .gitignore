@@ -46,3 +46,4 @@
 *.ilk
 *.recipe
 *.txt
+.vscode/settings.json

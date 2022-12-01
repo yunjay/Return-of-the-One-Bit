@@ -104,7 +104,7 @@ class Model {
 			}
 			this->maxBoxPoint = glm::vec3(maxX,maxY,maxZ);
 			this->minBoxPoint = glm::vec3(minX,minY,minZ);
-			this->scale = 1.0 / (maxY - minY);
+			(maxY-minY)>(maxX-minX)? this->scale = 1.0f/(maxX-minX): this->scale = 1.0f/(maxY-minY) ;
 		}
 		
 	private:

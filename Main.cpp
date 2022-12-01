@@ -24,7 +24,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 //camera
 glm::vec3 cameraFront = glm::vec3(0.0, 0.0, -1.0);
 glm::vec3 cameraUp = glm::vec3(0.0, 1.0, 0.0);
-glm::vec3 cameraPos = glm::vec3(0.0, 0.5f, 1.0);
+glm::vec3 cameraPos = glm::vec3(0.0, 0.5f, 2.0);
 glm::vec3 cameraLeft = glm::normalize(glm::cross(cameraUp,cameraFront));
 GLfloat yaw = -90.0f;
 GLfloat pitch = 0.0f;

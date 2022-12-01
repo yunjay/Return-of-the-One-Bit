@@ -13,7 +13,8 @@ uniform vec3 lowColor;
 void main() {
     //diffuse
     vec3 normal = normalize(Normal);
-    vec3 lightDir = normalize(lightPos - FragPos);
+    //vec3 lightDir = normalize(lightPos - FragPos);
+    vec3 lightDir = normalize(lightPos);
     float diff = max(dot(normal, lightDir), 0.0); //cos
 
     //ambient
