@@ -7,7 +7,7 @@
 
 ## Features
 
-![Interface](images/interface.png)
+![Interface](images/interface.gif)
 
 ### Controls
 
