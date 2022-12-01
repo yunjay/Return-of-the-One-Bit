@@ -95,9 +95,12 @@ int main()
     lucy.setPosition(glm::vec3(-5.0f, 0.0f, 0.0f) - lucy.scale * lucy.minBoxPoint);
     dragon.setPosition(glm::vec3(-3.0f, 0.0f, 0.0f)- dragon.scale * dragon.minBoxPoint);
     bunny.setPosition(glm::vec3(0.0f, 0.0f, 0.0f)-bunny.scale * bunny.minBoxPoint); 
-    boat.setPosition(glm::vec3(2.0f, 0.0f, 0.0f)-boat.scale * boat.minBoxPoint);
-    teapot.setPosition(glm::vec3(4.0f, 0.0f, 0.0f)-teapot.scale * teapot.minBoxPoint);
+    boat.setPosition(glm::vec3(4.0f, 0.0f, 0.0f)-boat.scale * boat.minBoxPoint);
+    teapot.setPosition(glm::vec3(6.0f, 0.0f, 0.0f)-teapot.scale * teapot.minBoxPoint);
+    
+    bunny.setScale(1.5f*bunny.scale);
 
+    floor.diffuseScale = 0.5f;
 
     std::vector<Model*> models;
     models.push_back(&floor);
@@ -189,7 +192,7 @@ int main()
 
         glUniform2f(glGetUniformLocation(*currentShader, "resolution"), SCR_WIDTH, SCR_HEIGHT);
 
-        //iterate models
+        //iterate models to render
         for (int i = 0; i < models.size(); i++) {
 
 
@@ -211,7 +214,7 @@ int main()
             glUniformMatrix4fv(glGetUniformLocation(*currentShader, "view"), 1, GL_FALSE, &view[0][0]);
             glUniformMatrix4fv(glGetUniformLocation(*currentShader, "projection"), 1, GL_FALSE, &projection[0][0]);
 
-            models[i]->render();
+            models[i]->render(*currentShader);
         }
         
 

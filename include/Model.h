@@ -15,13 +15,6 @@ class Mesh {
 			std::vector<glm::vec3> normals;
 			std::vector<unsigned int> indices;
 			bool isSet = false;
-			void render(){
-				if (!isSet)this->setup();
-
-				glBindVertexArray(VAO);
-	        	glDrawElements(GL_TRIANGLES, static_cast<unsigned int>(indices.size()), GL_UNSIGNED_INT, 0);
-    	    	glBindVertexArray(0);
-			}
 
 			Mesh(const std::vector<glm::vec3> inVertices,
 				const std::vector<glm::vec3> inNormals,
@@ -33,6 +26,15 @@ class Mesh {
 				
 				this->setup();
 			}
+
+			void render(){
+				if (!isSet)this->setup();
+
+				glBindVertexArray(VAO);
+	        	glDrawElements(GL_TRIANGLES, static_cast<unsigned int>(indices.size()), GL_UNSIGNED_INT, 0);
+    	    	glBindVertexArray(0);
+			}
+
 		private:
 			void setup(){
 				glGenVertexArrays(1, &VAO); //vertex array object
@@ -75,6 +77,7 @@ class Model {
 		std::vector<Mesh> meshes;
 		glm::vec3 position = glm::vec3(0.0,0.0,0.0);
 		GLfloat scale;
+		GLfloat diffuseScale=1.0f;
 		glm::vec3 maxBoxPoint;
 		glm::vec3 minBoxPoint;
 
@@ -84,11 +87,14 @@ class Model {
 			loadAssimp(this->path);			
 			getBoundingBox();
 		}
-		void render() {
+		void render(GLUint shader) {
+			glUniform1f(glGetUniformLocation(shader, "diffuseScale"), this->diffuseScale);
+
 			for (unsigned int i = 0; i < meshes.size(); i++)
 				meshes[i].render();
 		}
 		void setPosition(glm::vec3 pos) { this->position = pos; }
+		void setScale(GLfloat scl){ this->scale = scl; }
 		void getBoundingBox() {
 			float maxX = meshes[0].vertices[0].x, maxY = meshes[0].vertices[0].y, maxZ = meshes[0].vertices[0].z;
 			float minX = meshes[0].vertices[0].x, minY = meshes[0].vertices[0].y, minZ = meshes[0].vertices[0].z;

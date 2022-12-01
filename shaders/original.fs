@@ -10,6 +10,8 @@ uniform vec3 viewPos;
 uniform vec3 highColor;
 uniform vec3 lowColor;
 
+uniform float diffuseScale;
+
 void main() {
     //ambient
     vec3 ambient = 0.04 * highColor;
@@ -18,7 +20,7 @@ void main() {
     //vec3 lightDir = normalize(lightPos - FragPos);
     vec3 lightDir = normalize(lightPos);
     float diff = max(dot(normal, lightDir), 0.0); //cos
-    vec3 diffuse = 1.0 * diff * highColor;
+    vec3 diffuse = diffuseScale * diff * highColor;
     
     //specular
     vec3 specular;

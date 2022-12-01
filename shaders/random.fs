@@ -12,6 +12,8 @@ uniform vec3 lowColor;
 
 uniform vec2 resolution;
 
+uniform float diffuseScale;
+
 float random (vec2 st) {
     //pseudorandom oneliner from book of shaders, returns 0.0~1.0
     return fract(sin(dot(st.xy,vec2(12.9898,78.233)))*43758.5453123);
@@ -21,7 +23,7 @@ void main() {
     vec3 normal = normalize(Normal);
     //vec3 lightDir = normalize(lightPos - FragPos);
     vec3 lightDir = normalize(lightPos);
-    float diff = max(dot(normal, lightDir), 0.0); //cos
+    float diff = diffuseScale * max(dot(normal, lightDir), 0.0); //cos
     
     //ambient
     diff+=0.1f;
