@@ -14,12 +14,15 @@ class Mesh {
 			std::vector<glm::vec3> vertices; //positions
 			std::vector<glm::vec3> normals;
 			std::vector<unsigned int> indices;
-
+			bool isSet = false;
 			void render(){
+				if (!isSet)this->setup();
+
 				glBindVertexArray(VAO);
 	        	glDrawElements(GL_TRIANGLES, static_cast<unsigned int>(indices.size()), GL_UNSIGNED_INT, 0);
     	    	glBindVertexArray(0);
 			}
+
 			Mesh(const std::vector<glm::vec3> inVertices,
 				const std::vector<glm::vec3> inNormals,
 				const std::vector<unsigned int> inIndices) {
@@ -27,6 +30,8 @@ class Mesh {
 				this->vertices = inVertices;
 				this->normals = inNormals;
 				this->indices = inIndices;
+				
+				this->setup();
 			}
 		private:
 			void setup(){
@@ -59,6 +64,8 @@ class Mesh {
 				glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
         		glBindVertexArray(0);
+
+				isSet = true;
 			}
 	};
 
@@ -66,14 +73,40 @@ class Model {
 	public:	
 		std::string path;
 		std::vector<Mesh> meshes;
-		void render(){
-			for(unsigned int i = 0; i < meshes.size(); i++)
-            	meshes[i].render();
-		}
+		glm::vec3 position = glm::vec3(0.0,0.0,-1.0);
+		GLfloat scale;
+		glm::vec3 maxBoxPoint;
+		glm::vec3 minBoxPoint;
+
+
 		Model(std::string p){
 			this->path=p;
 			loadAssimp(this->path);			
+			getBoundingBox();
 		}
+		void render() {
+			for (unsigned int i = 0; i < meshes.size(); i++)
+				meshes[i].render();
+		}
+		void setPosition(glm::vec3 pos) { this->position = pos; }
+		void getBoundingBox() {
+			float maxX = meshes[0].vertices[0].x, maxY = meshes[0].vertices[0].y, maxZ = meshes[0].vertices[0].z;
+			float minX = meshes[0].vertices[0].x, minY = meshes[0].vertices[0].y, minZ = meshes[0].vertices[0].z;
+			for (int meshNum = 0; meshNum < this->meshes.size(); meshNum++) {
+				for (int i = 0; i < meshes[meshNum].vertices.size(); i++) {
+					(meshes[meshNum].vertices[i].x > maxX) ? maxX = meshes[meshNum].vertices[i].x : 0;
+					(meshes[meshNum].vertices[i].y > maxY) ? maxY = meshes[meshNum].vertices[i].y : 0;
+					(meshes[meshNum].vertices[i].z > maxZ) ? maxZ = meshes[meshNum].vertices[i].z : 0;
+					(meshes[meshNum].vertices[i].x < minX) ? minX = meshes[meshNum].vertices[i].x : 0;
+					(meshes[meshNum].vertices[i].y < minY) ? minY = meshes[meshNum].vertices[i].y : 0;
+					(meshes[meshNum].vertices[i].z < minZ) ? minZ = meshes[meshNum].vertices[i].z : 0;
+				}
+			}
+			this->maxBoxPoint = glm::vec3(maxX,maxY,maxZ);
+			this->minBoxPoint = glm::vec3(minX,minY,minZ);
+			this->scale = 1.0 / (maxY - minY);
+		}
+		
 	private:
 		bool loadAssimp(std::string const path){
 			Assimp::Importer importer;

@@ -18,15 +18,27 @@ using std::cout;
 // settings
 const unsigned int SCR_WIDTH = 1200;
 const unsigned int SCR_HEIGHT = 800;
+float cameraSpeed = 2.0f;
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+
+//camera
+glm::vec3 cameraFront = glm::vec3(0.0, 0.0, -1.0);
+glm::vec3 cameraUp = glm::vec3(0.0, 1.0, 0.0);
+glm::vec3 cameraPos = glm::vec3(0.0, 0.0, 1.0);
+glm::vec3 cameraLeft = glm::normalize(glm::cross(cameraUp,cameraFront));
+GLfloat yaw = -90.0f;
+GLfloat pitch = 0.0f;
+
 
 // timing
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 
 // User
-glm::vec3 lowColor(0.0,0.0,0.0);
-glm::vec3 highColor(1.0,1.0,1.0);
+glm::vec3 lowColor(51.0f/255.0f, 51.0f/255.0f, 23.0f/255.0f);
+glm::vec3 highColor(229.0f/255.0f, 1.0f, 1.0f);
+
+void processInput(GLFWwindow* window);
 
 int main()
 {
@@ -70,29 +82,45 @@ int main()
     glClearColor(30.0 / 255, 30.0 / 255, 30.0 / 255, 0.0); //background
 
     //Load Models
-    Model bunny("./models/");
-    Model brain("./models/");
+    Model bunny("./models/stanford-bunny.obj");
+    Model lucy("./models/lucy.obj");
+    Model dragon("./models/xyzrgb_dragon.obj");
+    Model teapot("./models/teapot.obj");
+    Model boat("./models/Boat.obj");
+
+    
+    lucy.setPosition(glm::vec3(-2.0f, 0.0f, 2.0f));
+    dragon.setPosition(glm::vec3(-1.0f, 0.0f, 2.0f));
+    bunny.setPosition(glm::vec3(0.0f, 0.0f, 2.0f)); 
+    boat.setPosition(glm::vec3(1.0f, 0.0f, 2.0f));
+    teapot.setPosition(glm::vec3(2.0f, 0.0f, 2.0f));
+
+    std::vector<Model*> models;
+    models.push_back(&bunny);
+    models.push_back(&lucy);
+    models.push_back(&dragon);
+    models.push_back(&teapot);
 
     //Load Shaders
-    GLuint original = loadShader("./shaders/vertex.vs", "./shaders/original.fs");
-    /*
-    GLuint threshold = loadShader("./shaders/vertex.vs", "./shaders/.fs");
-    GLuint random = loadShader("./shaders/vertex.vs", "./shaders/.fs");
-    GLuint bayer4 = loadShader("./shaders/vertex.vs", "./shaders/.fs");
-    GLuint bayer16 = loadShader("./shaders/vertex.vs", "./shaders/.fs");
+    
     GLuint bayer64 = loadShader("./shaders/vertex.vs", "./shaders/.fs");
+    GLuint bayer16 = loadShader("./shaders/vertex.vs", "./shaders/.fs");
+    GLuint bayer4 = loadShader("./shaders/vertex.vs", "./shaders/.fs");
     GLuint halftone = loadShader("./shaders/vertex.vs", "./shaders/.fs");
     GLuint voidAndCluster = loadShader("./shaders/vertex.vs", "./shaders/.fs");
-    */
+    GLuint random = loadShader("./shaders/vertex.vs", "./shaders/.fs");
+    GLuint threshold = loadShader("./shaders/vertex.vs", "./shaders/.fs");
+    GLuint original = loadShader("./shaders/vertex.vs", "./shaders/original.fs");
+    
+    GLuint *shaders[] = { &bayer64, &bayer16, &bayer4, &halftone, &voidAndCluster, &random, &threshold, &original };
+    const char* shaderNames[] = { "Bayer 64x64", "Bayer 16x16", "Bayer 4x4", "Halftone", "Void and Cluster", "Random", "Threshold", "Original" };
 
-
-    GLuint* currentShader = &original;
+    GLuint* currentShader = &bayer64;
+    currentShader = &original;
 
     //view
-    glm::vec3 cameraPos = glm::vec3(0, 0, 1);
     //light settings
-    glm::vec3 lightPos = glm::vec3(-1, 1, 1);
-
+    glm::vec3 lightPos = glm::vec3(-1.0f, 3.0f, 1.0f);
 
     //render loop
     while (!glfwWindowShouldClose(window))
@@ -101,6 +129,11 @@ int main()
         float currentFrame = static_cast<float>(glfwGetTime());
         deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
+        
+        processInput(window);
+        
+        //clear
+        glClearColor(lowColor.x,lowColor.y,lowColor.z,0.0);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
@@ -123,51 +156,54 @@ int main()
         ImGui::SliderFloat("Light by scale clamp coefficient", &clampCoef, 1.0f, 1000.0f);
         ImGui::SliderFloat("Ambient", &ambient, 0.0f, 1.0f);
         */
-        
+        static int shaderItem = 0;
+        ImGui::ListBox("Dithering Method", &shaderItem, shaderNames, IM_ARRAYSIZE(shaderNames), 4);
+        currentShader = shaders[shaderItem];
+
+        ImGuiColorEditFlags misc_flags = (0 | ImGuiColorEditFlags_NoDragDrop | 0 | ImGuiColorEditFlags_NoOptions);
+        ImGui::ColorEdit3("Low Color (Black)", (float*)&lowColor, misc_flags);
+        ImGui::ColorEdit3("High Color (White)", (float*)&highColor, misc_flags);
+
+
+
         ImGui::End();
 
-        glUseProgram(*currentShader);
-
         //Uniforms
-        glUniform3f(glGetUniformLocation(*currentShader, "light.position"), lightPos.x, lightPos.y, lightPos.z);
         
+        for (int i = 0; i < models.size(); i++) {
+            glUseProgram(*currentShader);
 
-        //opengl matrice transforms are applied from the right side. (last first)
-        glm::mat4 model = glm::mat4(1);
-        model = glm::translate(model, glm::vec3(0, -0.4, -1.0f));
-        model = glm::translate(model, (-1.0f) * cen);
-        model = glm::scale(model, glm::vec3(modelSize, modelSize, modelSize));
-        model = glm::rotate(model, glm::radians(yDegrees), glm::vec3(0, 1, 0));
-        model = glm::rotate(model, glm::radians(xDegrees), glm::vec3(1, 0, 0));
-        glm::mat4 view = glm::lookAt(cameraPos, glm::vec3(0, 0, -1), glm::vec3(0, 1, 0));
-        glm::mat4 projection = glm::perspective(glm::radians(90.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-
-        glUniformMatrix4fv(glGetUniformLocation(*currentShader, "model"), 1, GL_FALSE, &model[0][0]);
-        glUniformMatrix4fv(glGetUniformLocation(*currentShader, "view"), 1, GL_FALSE, &view[0][0]);
-        glUniformMatrix4fv(glGetUniformLocation(*currentShader, "projection"), 1, GL_FALSE, &projection[0][0]);
-
-        //printShader(bunny, contribution);
-
-        bunny.render(*currentShader);
-        /*
-        glUseProgram(principalDirections);
-        glUniform1f(glGetUniformLocation(principalDirections,"magnitude"), 0.001*feature);
-        glUniformMatrix4fv(glGetUniformLocation(principalDirections, "model"), 1, GL_FALSE, &model[0][0]);
-        glUniformMatrix4fv(glGetUniformLocation(principalDirections, "view"), 1, GL_FALSE, &view[0][0]);
-        glUniformMatrix4fv(glGetUniformLocation(principalDirections, "projection"), 1, GL_FALSE, &projection[0][0]);
-        */
-
-        //bunny.render(principalDirections);
+            glUniform3f(glGetUniformLocation(*currentShader, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
+            glUniform3f(glGetUniformLocation(*currentShader, "viewPos"), cameraPos.x, cameraPos.y, cameraPos.z);
+            glUniform3f(glGetUniformLocation(*currentShader, "lowColor"), lowColor.x, lowColor.y, lowColor.z);
+            glUniform3f(glGetUniformLocation(*currentShader, "highColor"), highColor.x, highColor.y, highColor.z);
 
 
+
+            //opengl matrices are applied from the right side. (last first)
+            glm::mat4 model = glm::mat4(1);
+            model = glm::translate(model, models[i]->position);
+            model = glm::scale(model, glm::vec3(models[i]->scale, models[i]->scale, models[i]->scale));
+            //model = glm::rotate(model, glm::radians(yDegrees), glm::vec3(0, 1, 0));
+            //model = glm::rotate(model, glm::radians(xDegrees), glm::vec3(1, 0, 0));
+            glm::mat4 view = glm::lookAt(cameraPos, cameraPos+cameraFront, cameraUp);
+            glm::mat4 projection = glm::perspective(glm::radians(60.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+
+            glUniformMatrix4fv(glGetUniformLocation(*currentShader, "model"), 1, GL_FALSE, &model[0][0]);
+            glUniformMatrix4fv(glGetUniformLocation(*currentShader, "view"), 1, GL_FALSE, &view[0][0]);
+            glUniformMatrix4fv(glGetUniformLocation(*currentShader, "projection"), 1, GL_FALSE, &projection[0][0]);
+
+            models[i]->render();
+        }
+        
 
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        
         glfwSwapBuffers(window);
         glfwPollEvents();
 
     }
-
 
 
 
@@ -176,7 +212,7 @@ int main()
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
 
-    // glfw: terminate, clearing all previously allocated GLFW resources.=
+    // glfwTerminate clears all allocated GLFW resources.
     glfwTerminate();
     return 0;
 }
@@ -184,8 +220,28 @@ int main()
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
-    // make sure the viewport matches the new window dimensions; note that width and 
-    // height will be significantly larger than specified on retina displays.
+    // makes sure the viewport matches the new window dimensions
+    // width and height will be significantly larger than specified on retina displays.
     glViewport(0, 0, width, height);
 }
+void processInput(GLFWwindow* window)
+{
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, true);
 
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+        cameraPos += cameraFront * cameraSpeed * deltaTime;
+    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+        cameraPos += -1.0f * cameraFront * cameraSpeed * deltaTime;
+    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+        cameraPos += cameraLeft * cameraSpeed * deltaTime;
+    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+        cameraPos += -1.0f * cameraLeft * cameraSpeed * deltaTime;
+
+    glm::vec3 front;
+    front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+    front.y = sin(glm::radians(pitch));
+    front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+    cameraFront = glm::normalize(front);
+    cameraLeft = glm::normalize(glm::cross(cameraUp, cameraFront));;
+}

@@ -4,19 +4,17 @@
 
 ## Dithering
 
-On a black-and-white two color system, shades of grey can be represented in a pointillistic matter by juxtaposition of black and white pixels. This is a technique originating from newspapers and the printing industry.
+On a black-and-white two color system, shades of grey can be expressed in a pointillistic matter by juxtaposition of black and white pixels. This is a technique originating from newspapers and the printing industry.
 
 ![Pointillism](/markdown/images/pointillism.jpg)
 
 This program showcases implementations of the following dithering methods.
 
-![Untitled](images/ditheringMethods.png)
+![DitheringMethods](images/ditheringMethods.png)
 
 ### Ordered Dithering
 
-![Untitled](images/bayerScale.png)
-
-### Temporal Connection
+![BayerScale](images/bayerScale.png)
 
 ## Dependencies
 
@@ -31,3 +29,5 @@ Built using vcpkg on Windows.
 ## References
 
 All images and algorithms are referenced from [wikipedia](https://en.wikipedia.org/wiki/Dither#Algorithms).
+
+3D models from [common-3D-test-models](https://github.com/alecjacobson/common-3d-test-models) uploaded by alecjacobson.

@@ -39,3 +39,7 @@
 *.ipch
 .vs/ReturnOfTheOneBit/v17/fileList.bin
 *.opendb
+*.idb
+*.pdb
+*.log
+*.tlog
