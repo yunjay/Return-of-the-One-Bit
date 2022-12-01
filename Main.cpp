@@ -205,7 +205,8 @@ int main()
 
             //floor lucy dragon bunny boat teapot
             if (i == 1){ //lucy
-                model= glm::rotate(model,glm::radians(90.0f),glm::vec3(1.0f,0.0f,0.0f));
+                model = glm::rotate(model,glm::radians(180.0f),glm::vec3(0.0f,1.0f,0.0f))
+                model= glm::rotate(model,glm::radians(-90.0f),glm::vec3(1.0f,0.0f,0.0f));
             }
             else if (i == 2){
             }
