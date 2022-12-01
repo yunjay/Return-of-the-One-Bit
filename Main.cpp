@@ -92,11 +92,11 @@ int main()
     Model boat("./models/Boat.obj");
 
     
-    lucy.setPosition(glm::vec3(-4.0f, 0.0f, 0.0f)-lucy.minBoxPoint);
-    dragon.setPosition(glm::vec3(-2.0f, 0.0f, 0.0f)-dragon.minBoxPoint);
-    bunny.setPosition(glm::vec3(0.0f, 0.0f, 0.0f)-bunny.minBoxPoint); 
-    boat.setPosition(glm::vec3(3.0f, 0.0f, 0.0f)-boat.minBoxPoint);
-    teapot.setPosition(glm::vec3(4.0f, 0.0f, 0.0f)-teapot.minBoxPoint);
+    lucy.setPosition(glm::vec3(-5.0f, 0.0f, 0.0f) - lucy.scale * lucy.minBoxPoint);
+    dragon.setPosition(glm::vec3(-3.0f, 0.0f, 0.0f)- dragon.scale * dragon.minBoxPoint);
+    bunny.setPosition(glm::vec3(0.0f, 0.0f, 0.0f)-bunny.scale * bunny.minBoxPoint); 
+    boat.setPosition(glm::vec3(2.0f, 0.0f, 0.0f)-boat.scale * boat.minBoxPoint);
+    teapot.setPosition(glm::vec3(4.0f, 0.0f, 0.0f)-teapot.scale * teapot.minBoxPoint);
 
     std::vector<Model*> models;
     models.push_back(&lucy);
@@ -187,6 +187,7 @@ int main()
 
         glUniform2f(glGetUniformLocation(*currentShader, "resolution"), SCR_WIDTH, SCR_HEIGHT);
 
+        //iterate models
         for (int i = 0; i < models.size(); i++) {
             
 
