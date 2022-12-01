@@ -38,8 +38,8 @@ void main() {
     diffuse+=0.08f;
 
     //decide color
-    float closeColor;
-    float otherColor;
+    vec3 closeColor;
+    vec3 otherColor;
     if(diffuse>0.5) {
         closeColor=highColor;
         otherColor=lowColor;
