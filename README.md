@@ -21,9 +21,7 @@ Graphic interface used with mouse.
 
 Choose between dithering methods.
 
-Dithering Methods :
-
-Bayer 8x8 Dithering, Bayer 4x4 Dithering, Bayer 2x2 Dithering, Halftone Dithering, Random Threshold Dithering, Threshold Dithering, "Original" - Multi-colored Blinn-Phong rendering (Not two tone).
+Dithering Methods : Bayer 8x8 Dithering, Bayer 4x4 Dithering, Bayer 2x2 Dithering, Halftone Dithering, Random Threshold Dithering, Threshold Dithering, "Original" - Multi-colored Blinn-Phong rendering (Not two tone).
 
 ![ChooseMethods](images/chooseMethods.gif)
 
@@ -38,6 +36,8 @@ Slider for rotating the light direction (location of the light source), and an o
 Customizable high color and low color for the two-color "one bit" shading.
 
 In a black and white actual one-bit rendering system, the high color would be white, as in 1, and the low color would be black, or 0.
+
+![chooseColors](images/chooseColors.gif)
 
 ## Dithering
 

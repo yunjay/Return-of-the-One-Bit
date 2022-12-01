@@ -130,7 +130,7 @@ int main()
     GLuint original = loadShader("./shaders/vertex.vs", "./shaders/original.fs");
     
     GLuint *shaders[] = { &bayer64, &bayer16, &bayer4, &halftone, /*&voidAndCluster,*/ &random, &threshold, &original};
-    const char* shaderNames[] = { "Bayer 64x64", "Bayer 16x16", "Bayer 4x4", "Halftone", /*"Void and Cluster",*/ "Random", "Threshold", "Original" };
+    const char* shaderNames[] = { "Bayer 8x8", "Bayer 4x4", "Bayer 2x2", "Halftone", /*"Void and Cluster",*/ "Random", "Threshold", "Original" };
 
     GLuint* currentShader = &bayer64;
     currentShader = &original;
@@ -184,7 +184,7 @@ int main()
         //Uniforms
         glm::mat4 lightRotate = glm::rotate(glm::mat4(1), glm::radians(lightDegrees), glm::vec3(0.0f, 1.0f, 0.0f));
         lightPos = glm::vec3(lightRotate*glm::vec4(lightPosInit,0.0f));
-        if (autoRotate) {lightDegrees += deltaTime * 30.0f;}
+        if (autoRotate) { lightDegrees += deltaTime * 30.0f; if(lightDegrees>360.0f)lightDegrees-=360.0f; }
         glUseProgram(*currentShader);
 
         glUniform3f(glGetUniformLocation(*currentShader, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
