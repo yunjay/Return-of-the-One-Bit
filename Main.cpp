@@ -112,11 +112,11 @@ int main()
 
     //Load Shaders
     
-    GLuint bayer64 = loadShader("./shaders/vertex.vs", "./shaders/.fs");
-    GLuint bayer16 = loadShader("./shaders/vertex.vs", "./shaders/.fs");
-    GLuint bayer4 = loadShader("./shaders/vertex.vs", "./shaders/.fs");
-    GLuint halftone = loadShader("./shaders/vertex.vs", "./shaders/.fs");
-    GLuint voidAndCluster = loadShader("./shaders/vertex.vs", "./shaders/.fs");
+    GLuint bayer64 = loadShader("./shaders/vertex.vs", "./shaders/bayer4.fs");
+    GLuint bayer16 = loadShader("./shaders/vertex.vs", "./shaders/bayer16.fs");
+    GLuint bayer4 = loadShader("./shaders/vertex.vs", "./shaders/bayer64.fs");
+    GLuint halftone = loadShader("./shaders/vertex.vs", "./shaders/halftone.fs");
+    GLuint voidAndCluster = loadShader("./shaders/vertex.vs", "./shaders/voidAndCluster.fs");
     GLuint random = loadShader("./shaders/vertex.vs", "./shaders/random.fs");
     GLuint threshold = loadShader("./shaders/vertex.vs", "./shaders/threshold.fs");
     GLuint original = loadShader("./shaders/vertex.vs", "./shaders/original.fs");
