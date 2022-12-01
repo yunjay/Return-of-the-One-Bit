@@ -5,6 +5,22 @@
 
 ![Demo](images/demo.gif)
 
+## Features
+
+![Interface](images/interface.png)
+
+### Controls
+
+WASD keyboard input for moving the position of the "camera" (viewpoint).
+Graphic interface used with mouse.
+
+### User Parameters
+
+1.
+2.
+3.
+4.
+
 
 ## Dithering
 
@@ -40,13 +56,19 @@ Below is a scale exemplifying how shades of grey are expressed by ordered dither
 
 ### Halftone Dithering
 
+A halftone-like effect can be achieved from a center circle focused dither matrix.
 
+Method from Gomes, Jonas. *Image Processing for Computer Graphics*, 1997.
 
 Screenshot from Program :
 
 ![Halftone](images/halftone.png)
 
 ### Bayer Dithering
+
+The following matrices are used for different sizes of bayer threshold matrices.
+
+![BayerMatrices](images/bayerMatrices.png)
 
 
 Screenshot from Program (Using 2x2 Bayer Matrix):

@@ -21,9 +21,16 @@ void main() {
     vec3 normal = normalize(Normal);
     //vec3 lightDir = normalize(lightPos - FragPos);
     vec3 lightDir = normalize(lightPos);
-    float diff = diffuseScale * max(dot(normal, lightDir), 0.0); //cos
+    float diffuse = diffuseScale * max(dot(normal, lightDir), 0.0); //cos
     
     //ambient
-    diff+=0.08f;
+    //diffuse = diffuse+0.08;
 
+    //position in matrix grid
+    int column = int(mod(gl_FragCoord.x, 2));
+    int row = int(mod(gl_FragCoord.y, 2));
+    float threshold = float(bayer4[ column + 2 * row ]) / 4.0;
+    
+    if(diffuse>threshold) color=vec4(highColor,1.0);
+    else color = vec4(lowColor,1.0);
 }

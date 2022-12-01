@@ -24,7 +24,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 //camera
 glm::vec3 cameraFront = glm::vec3(0.0, 0.0, -1.0);
 glm::vec3 cameraUp = glm::vec3(0.0, 1.0, 0.0);
-glm::vec3 cameraPos = glm::vec3(0.0, 0.8f, 5.0);
+glm::vec3 cameraPos = glm::vec3(0.0, 1.2f, 5.0);
 glm::vec3 cameraLeft = glm::normalize(glm::cross(cameraUp,cameraFront));
 GLfloat yaw = -90.0f;
 GLfloat pitch = 0.0f;
@@ -39,6 +39,7 @@ glm::vec3 lowColor(51.0f/255.0f, 51.0f/255.0f, 23.0f/255.0f);
 glm::vec3 highColor(229.0f/255.0f, 1.0f, 1.0f);
 float lightDegrees=0.0f;
 bool autoRotate = false;
+float pixelThreshold = 0.5f;
 
 
 void processInput(GLFWwindow* window);
@@ -92,7 +93,7 @@ int main()
     Model teapot("./models/teapot.obj");
     Model boat("./models/Boat.obj");
     
-    lucy.setPosition(glm::vec3(-5.0f, 0.2f, 2.0f) - lucy.scale * lucy.minBoxPoint);
+    lucy.setPosition(glm::vec3(-4.5f, 0.2f, 2.0f) - lucy.scale * lucy.minBoxPoint);
     dragon.setPosition(glm::vec3(-4.0f, 0.0f, 0.0f)- dragon.scale * dragon.minBoxPoint);
     bunny.setPosition(glm::vec3(0.0f, 0.0f, 2.0f)-bunny.scale * bunny.minBoxPoint); 
     boat.setPosition(glm::vec3(5.0f, 0.0f, -0.5f)-boat.scale * boat.minBoxPoint);
@@ -112,9 +113,9 @@ int main()
 
     //Load Shaders
     
-    GLuint bayer64 = loadShader("./shaders/vertex.vs", "./shaders/bayer4.fs");
+    GLuint bayer64 = loadShader("./shaders/vertex.vs", "./shaders/bayer64.fs");
     GLuint bayer16 = loadShader("./shaders/vertex.vs", "./shaders/bayer16.fs");
-    GLuint bayer4 = loadShader("./shaders/vertex.vs", "./shaders/bayer64.fs");
+    GLuint bayer4 = loadShader("./shaders/vertex.vs", "./shaders/bayer4.fs");
     GLuint halftone = loadShader("./shaders/vertex.vs", "./shaders/halftone.fs");
     GLuint voidAndCluster = loadShader("./shaders/vertex.vs", "./shaders/voidAndCluster.fs");
     GLuint random = loadShader("./shaders/vertex.vs", "./shaders/random.fs");
@@ -159,6 +160,8 @@ int main()
         static int shaderItem = 0;
         ImGui::ListBox("Dithering Method", &shaderItem, shaderNames, IM_ARRAYSIZE(shaderNames), 4);
         currentShader = shaders[shaderItem];
+
+        //ImGui::SliderFloat("Dithering Threshold", &pixelThreshold, 0.0f, 1.0f);
         ImGui::SliderFloat("Rotate Light Direction", &lightDegrees, 0.0f, 360.0f);
         ImGui::Checkbox("Auto Rotate Light Source", &autoRotate);
 
@@ -174,7 +177,7 @@ int main()
         //Uniforms
         glm::mat4 lightRotate = glm::rotate(glm::mat4(1), glm::radians(lightDegrees), glm::vec3(0.0f, 1.0f, 0.0f));
         lightPos = glm::vec3(lightRotate*glm::vec4(lightPosInit,0.0f));
-        if (autoRotate) {lightDegrees += deltaTime * 1.0f;}
+        if (autoRotate) {lightDegrees += deltaTime * 10.0f;}
         glUseProgram(*currentShader);
 
         glUniform3f(glGetUniformLocation(*currentShader, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
@@ -183,6 +186,8 @@ int main()
         glUniform3f(glGetUniformLocation(*currentShader, "highColor"), highColor.x, highColor.y, highColor.z);
 
         glUniform2f(glGetUniformLocation(*currentShader, "resolution"), SCR_WIDTH, SCR_HEIGHT);
+        //glUniform1f(glGetUniformLocation(*currentShader, "pixelThreshold"), pixelThreshold);
+
         //Model specific uniforms are sent in Model class methods.
 
         //iterate models to render
