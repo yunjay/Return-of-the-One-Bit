@@ -87,7 +87,7 @@ class Model {
 			loadAssimp(this->path);			
 			getBoundingBox();
 		}
-		void render(GLUint shader) {
+		void render(GLuint shader) {
 			glUniform1f(glGetUniformLocation(shader, "diffuseScale"), this->diffuseScale);
 
 			for (unsigned int i = 0; i < meshes.size(); i++)
