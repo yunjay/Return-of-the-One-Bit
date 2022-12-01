@@ -52,6 +52,6 @@ void main() {
     }
     float dither = ditherIndex();
     float dist = abs(closeColorf - diffuse);
+    
     (dist < dither ) ? color = vec4(closeColor,1.0f) : color = vec4(otherColor,1.0f);
-    return color;
 }

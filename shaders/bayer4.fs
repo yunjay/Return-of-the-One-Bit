@@ -14,10 +14,8 @@ uniform vec2 resolution;
 
 uniform float diffuseScale;
 
-const int bayer4[16] = int[](0,  8,  2,  10,
-                                     12, 4,  14, 6,
-                                     3,  11, 1,  9,
-                                     15, 7,  13, 5);
+const int bayer4[4] = int[](0,  2,  
+                            3,  1);
 void main() {
     //diffuse
     vec3 normal = normalize(Normal);
