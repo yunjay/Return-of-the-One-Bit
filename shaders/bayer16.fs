@@ -41,18 +41,18 @@ void main() {
     vec3 closeColor;
     vec3 otherColor;
     float closeColorf;
-    if(diffuse>0.5) {
+    if(diffuse > 0.5) {
         closeColor=highColor;
         otherColor=lowColor;
-        closeColorf=1.0f;
+        closeColorf = 1.0;
     }
     else{
         closeColor=lowColor;
         otherColor=highColor;
-        closeColorf=0.0f;
+        closeColorf = 0.0;
     }
-    float d = ditherIndex();
+    float dither = ditherIndex();
     float dist = abs(closeColorf - diffuse);
-    return (dist < d) ? color = vec4(closeColor,1.0f) : color = vec4(otherColor,1.0f);
-
+    (dist < dither ) ? color = vec4(closeColor,1.0f) : color = vec4(otherColor,1.0f);
+    return color;
 }
