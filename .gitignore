@@ -5,7 +5,6 @@
 *.slo
 *.lo
 *.o
-*.obj
 
 # Precompiled Headers
 *.gch
@@ -54,3 +53,11 @@ ReturnOfTheOneBit.vcxproj.filters
 >>>>>>> Stashed changes
 ReturnOfTheOneBit.vcxproj.filters
 ReturnOfTheOneBit.vcxproj
+x64/Debug/imgui.obj
+x64/Debug/imgui_demo.obj
+x64/Debug/imgui_draw.obj
+x64/Debug/imgui_impl_glfw.obj
+x64/Debug/imgui_impl_opengl3.obj
+x64/Debug/imgui_tables.obj
+x64/Debug/imgui_widgets.obj
+x64/Debug/Main.obj
