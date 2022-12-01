@@ -1,5 +1,6 @@
 # Return of the One Bit
 
+
 3D rendering showcase of dithering shaders inspired by the game *Return of the Obra Dinn* by Lucas Pope, which features two-color dithering graphics.
 
 
@@ -17,7 +18,7 @@ Graphic interface used with mouse.
 
 ### User Parameters
 
-1. Dithering Method
+**1. Dithering Method**
 
 Choose between dithering methods.
 
@@ -25,13 +26,13 @@ Dithering Methods : Bayer 8x8 Dithering, Bayer 4x4 Dithering, Bayer 2x2 Ditherin
 
 ![ChooseMethods](images/chooseMethods.gif)
 
-2. Light Direction and Rotation
+**2. Light Direction and Rotation**
 
 Slider for rotating the light direction (location of the light source), and a checkbox option for auto-rotation of the light source.
 
 ![lightRotation](images/lightRotation.gif)
 
-3. "One-bit" Color Customization
+**3. "One-bit" Color Customization**
 
 Customizable high color and low color for the two-color "one bit" shading.
 
@@ -83,7 +84,7 @@ Screenshot from Program :
 
 The following matrices are used for different sizes of bayer threshold matrices.
 
-![BayerMatrices](images/bayerMatrices.png)
+![BayerMatrices](images/bayerMatrices.png | width=200)
 
 
 Screenshot from Program (Using 2x2 Bayer Matrix):
