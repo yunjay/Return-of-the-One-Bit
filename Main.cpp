@@ -93,10 +93,10 @@ int main()
 
     
     lucy.setPosition(glm::vec3(-4.0f, 0.0f, 0.0f)-lucy.minBoxPoint);
-    dragon.setPosition(glm::vec3(-2.0f, 0.0f, 0.0f));
-    bunny.setPosition(glm::vec3(0.0f, 0.0f, 0.0f)); 
-    boat.setPosition(glm::vec3(1.0f, 0.0f, 0.0f));
-    teapot.setPosition(glm::vec3(2.0f, 0.0f, 0.0f));
+    dragon.setPosition(glm::vec3(-2.0f, 0.0f, 0.0f)-dragon.minBoxPoint);
+    bunny.setPosition(glm::vec3(0.0f, 0.0f, 0.0f)-bunny.minBoxPoint); 
+    boat.setPosition(glm::vec3(3.0f, 0.0f, 0.0f)-boat.minBoxPoint);
+    teapot.setPosition(glm::vec3(4.0f, 0.0f, 0.0f)-teapot.minBoxPoint);
 
     std::vector<Model*> models;
     models.push_back(&lucy);
@@ -125,7 +125,7 @@ int main()
     //view
     //light settings
     glm::vec3 lightPosInit = glm::vec3(-1.0f, 1.0f, 0.5f);
-    glm::vec3 lightPos = lightPostInit;
+    glm::vec3 lightPos = lightPosInit;
     //directional light
 
     //render loop
