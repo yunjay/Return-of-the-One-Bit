@@ -63,7 +63,7 @@ GLuint loadShader(const GLchar* vertexPath, const GLchar* fragmentPath) {
     if (!success) {
         glGetProgramInfoLog(program, 512, NULL, log);
         cout << "Shader program linking failed for "<<vertexPath<<" and "<<fragmentPath<<" .\n"; 
-        cout << log << "\n";
+        cout << log << "\n------Link Fail------\n";
     }
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);

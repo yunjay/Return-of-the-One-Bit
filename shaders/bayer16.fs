@@ -14,8 +14,7 @@ uniform vec2 resolution;
 
 uniform float diffuseScale;
 //threshold map
-const int bayer16[16] = int[](
-                            0,  8,  2,  10,
+const int bayer16[16] = int[](0,  8,  2,  10,
                             12, 4,  14, 6,
                             3,  11, 1,  9,
                             15, 7,  13, 5);
@@ -25,7 +24,7 @@ float ditherIndex() { //value from dither matrix
     //glsl mod function for % as % is not implemented as an operator is glsl
     int column = int(mod(gl_FragCoord.x, 4));
     int row = int(mod(gl_FragCoord.y, 4));
-    return bayer16[ column + 4 * row ] / 16.0;
+    return (bayer16[ (column + 4 * row) ] / 16.0);
 }
 void main() {
     //diffuse
@@ -42,13 +41,13 @@ void main() {
     vec3 otherColor;
     float closeColorf;
     if(diffuse > 0.5) {
-        closeColor=highColor;
-        otherColor=lowColor;
+        closeColor = highColor;
+        otherColor = lowColor;
         closeColorf = 1.0;
     }
     else{
-        closeColor=lowColor;
-        otherColor=highColor;
+        closeColor = lowColor;
+        otherColor = highColor;
         closeColorf = 0.0;
     }
     float dither = ditherIndex();
