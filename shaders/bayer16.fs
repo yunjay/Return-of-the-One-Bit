@@ -42,9 +42,6 @@ void main() {
     float otherColor = 1 - closeColor;
     float d = ditherIndex();
     float dist = abs(closeColor - diff);
-    return (dist < d) ? closeColor : otherColor;
-    
-    if(diff>randomThreshold)color = vec4(highColor,1.0f);
-    else color = vec4(lowColor,1.0f);
+    return (dist < d) ? color = vec4(closeColor,1.0f) : color = vec4(otherColor,1.0f);
 
 }
