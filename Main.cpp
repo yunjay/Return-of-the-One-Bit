@@ -92,14 +92,14 @@ int main()
     Model teapot("./models/teapot.obj");
     Model boat("./models/Boat.obj");
     
-    lucy.setPosition(glm::vec3(-3.0f, 0.0f, 0.0f) - lucy.scale * lucy.minBoxPoint);
-    dragon.setPosition(glm::vec3(-2.0f, 0.0f, 0.0f)- dragon.scale * dragon.minBoxPoint);
+    lucy.setPosition(glm::vec3(-4.0f, 0.0f, 0.0f) - lucy.scale * lucy.minBoxPoint);
+    dragon.setPosition(glm::vec3(-3.0f, 0.0f, 1.0f)- dragon.scale * dragon.minBoxPoint);
     bunny.setPosition(glm::vec3(0.0f, 0.0f, 0.0f)-bunny.scale * bunny.minBoxPoint); 
-    boat.setPosition(glm::vec3(2.0f, 0.0f, 0.0f)-boat.scale * boat.minBoxPoint);
-    teapot.setPosition(glm::vec3(5.0f, 0.0f, 0.0f)-teapot.scale * teapot.minBoxPoint);
+    boat.setPosition(glm::vec3(5.0f, 0.0f, -0.5f)-boat.scale * boat.minBoxPoint);
+    teapot.setPosition(glm::vec3(2.0f, 0.0f, 1.0f)-teapot.scale * teapot.minBoxPoint);
     
     bunny.setScale(1.5f*bunny.scale);
-
+    dragon.setScale(1.5f*dragon.scale);
     floor.diffuseScale = 0.55f;
 
     std::vector<Model*> models;
