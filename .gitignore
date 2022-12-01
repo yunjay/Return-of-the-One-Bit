@@ -43,3 +43,6 @@
 *.pdb
 *.log
 *.tlog
+*.ilk
+*.recipe
+*.txt
