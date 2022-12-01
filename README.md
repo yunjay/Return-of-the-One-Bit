@@ -12,15 +12,32 @@
 ### Controls
 
 WASD keyboard input for moving the position of the "camera" (viewpoint).
+
 Graphic interface used with mouse.
 
 ### User Parameters
 
-1.
-2.
-3.
-4.
+1. Dithering Method
 
+Choose between dithering methods.
+
+Dithering Methods :
+
+Bayer 8x8 Dithering, Bayer 4x4 Dithering, Bayer 2x2 Dithering, Halftone Dithering, Random Threshold Dithering, Threshold Dithering, "Original" - Multi-colored Blinn-Phong rendering (Not two tone).
+
+![ChooseMethods](images/chooseMethods.gif)
+
+2. Light Direction and Rotation
+
+Slider for rotating the light direction (location of the light source), and an option for auto-rotation of the light source.
+
+![lightRotation](images/lightRotation.gif)
+
+3. "One-bit" Color Customization
+
+Customizable high color and low color for the two-color "one bit" shading.
+
+In a black and white actual one-bit rendering system, the high color would be white, as in 1, and the low color would be black, or 0.
 
 ## Dithering
 

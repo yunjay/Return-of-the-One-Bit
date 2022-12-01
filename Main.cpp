@@ -16,15 +16,17 @@
 
 using std::cout;
 // settings
-unsigned int SCR_WIDTH = 1200;
-unsigned int SCR_HEIGHT = 800;
+//const unsigned int SCR_WIDTH = 1200;
+const unsigned int SCR_WIDTH = 600;
+//const unsigned int SCR_HEIGHT = 800;
+const unsigned int SCR_HEIGHT = 400;
 float cameraSpeed = 2.0f;
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
 //camera
 glm::vec3 cameraFront = glm::vec3(0.0, 0.0, -1.0);
 glm::vec3 cameraUp = glm::vec3(0.0, 1.0, 0.0);
-glm::vec3 cameraPos = glm::vec3(0.0, 1.2f, 5.0);
+glm::vec3 cameraPos = glm::vec3(0.0, 1.0f, 5.0);
 glm::vec3 cameraLeft = glm::normalize(glm::cross(cameraUp,cameraFront));
 GLfloat yaw = -90.0f;
 GLfloat pitch = 0.0f;
@@ -92,16 +94,20 @@ int main()
     Model dragon("./models/xyzrgb_dragon.obj");
     Model teapot("./models/teapot.obj");
     Model boat("./models/Boat.obj");
-    
-    lucy.setPosition(glm::vec3(-4.5f, 0.2f, 2.0f) - lucy.scale * lucy.minBoxPoint);
+    Model wall("./models/wall.obj");
+
+    lucy.setPosition(glm::vec3(-2.5f, 0.2f, 2.0f) - lucy.scale * lucy.minBoxPoint);
     dragon.setPosition(glm::vec3(-4.0f, 0.0f, 0.0f)- dragon.scale * dragon.minBoxPoint);
-    bunny.setPosition(glm::vec3(0.0f, 0.0f, 2.0f)-bunny.scale * bunny.minBoxPoint); 
-    boat.setPosition(glm::vec3(5.0f, 0.0f, -0.5f)-boat.scale * boat.minBoxPoint);
-    teapot.setPosition(glm::vec3(2.0f, 0.0f, 2.0f)-teapot.scale * teapot.minBoxPoint);
+    bunny.setPosition(glm::vec3(0.0f, 0.0f, 3.0f)-bunny.scale * bunny.minBoxPoint); 
+    boat.setPosition(glm::vec3(5.0f, 0.0f, 2.0f)-boat.scale * boat.minBoxPoint);
+    teapot.setPosition(glm::vec3(2.0f, 0.0f, 0.0f)-teapot.scale * teapot.minBoxPoint);
     
     bunny.setScale(1.5f*bunny.scale);
     dragon.setScale(1.5f*dragon.scale);
-    floor.diffuseScale = 0.4f;
+    floor.setScale(1.0f);
+    wall.setScale(1.0f);
+    floor.diffuseScale = 0.2f;
+    wall.diffuseScale = 0.1f;
 
     std::vector<Model*> models;
     models.push_back(&floor);
@@ -110,6 +116,7 @@ int main()
     models.push_back(&bunny);
     models.push_back(&boat);
     models.push_back(&teapot);
+    models.push_back(&wall);
 
     //Load Shaders
     
@@ -117,13 +124,13 @@ int main()
     GLuint bayer16 = loadShader("./shaders/vertex.vs", "./shaders/bayer16.fs");
     GLuint bayer4 = loadShader("./shaders/vertex.vs", "./shaders/bayer4.fs");
     GLuint halftone = loadShader("./shaders/vertex.vs", "./shaders/halftone.fs");
-    GLuint voidAndCluster = loadShader("./shaders/vertex.vs", "./shaders/voidAndCluster.fs");
+    //GLuint voidAndCluster = loadShader("./shaders/vertex.vs", "./shaders/voidAndCluster.fs");
     GLuint random = loadShader("./shaders/vertex.vs", "./shaders/random.fs");
     GLuint threshold = loadShader("./shaders/vertex.vs", "./shaders/threshold.fs");
     GLuint original = loadShader("./shaders/vertex.vs", "./shaders/original.fs");
     
-    GLuint *shaders[] = { &bayer64, &bayer16, &bayer4, &halftone, &voidAndCluster, &random, &threshold, &original };
-    const char* shaderNames[] = { "Bayer 64x64", "Bayer 16x16", "Bayer 4x4", "Halftone", "Void and Cluster", "Random", "Threshold", "Original" };
+    GLuint *shaders[] = { &bayer64, &bayer16, &bayer4, &halftone, /*&voidAndCluster,*/ &random, &threshold, &original};
+    const char* shaderNames[] = { "Bayer 64x64", "Bayer 16x16", "Bayer 4x4", "Halftone", /*"Void and Cluster",*/ "Random", "Threshold", "Original" };
 
     GLuint* currentShader = &bayer64;
     currentShader = &original;
@@ -177,7 +184,7 @@ int main()
         //Uniforms
         glm::mat4 lightRotate = glm::rotate(glm::mat4(1), glm::radians(lightDegrees), glm::vec3(0.0f, 1.0f, 0.0f));
         lightPos = glm::vec3(lightRotate*glm::vec4(lightPosInit,0.0f));
-        if (autoRotate) {lightDegrees += deltaTime * 10.0f;}
+        if (autoRotate) {lightDegrees += deltaTime * 30.0f;}
         glUseProgram(*currentShader);
 
         glUniform3f(glGetUniformLocation(*currentShader, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
@@ -199,9 +206,9 @@ int main()
             model = glm::translate(model, models[i]->position);
             model = glm::scale(model, glm::vec3(models[i]->scale, models[i]->scale, models[i]->scale));
             glm::mat4 view = glm::lookAt(cameraPos, cameraPos+cameraFront, cameraUp);
-            glm::mat4 projection = glm::perspective(glm::radians(60.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+            glm::mat4 projection = glm::perspective(glm::radians(60.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 150.0f);
 
-            //floor lucy dragon bunny boat teapot
+            //floor lucy dragon bunny boat teapot wall
             if (i == 1){ //lucy
                 model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
                 model= glm::rotate(model,glm::radians(-90.0f),glm::vec3(1.0f,0.0f,0.0f));
