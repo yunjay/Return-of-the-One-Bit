@@ -6,8 +6,6 @@
 
 On a black-and-white two color system, shades of grey can be expressed in a pointillistic matter by juxtaposition of black and white pixels. This is a technique originating from newspapers and the printing industry.
 
-![Pointillism](/markdown/images/pointillism.jpg)
-
 This program showcases implementations of the following dithering methods.
 
 ![DitheringMethods](images/ditheringMethods.png)
