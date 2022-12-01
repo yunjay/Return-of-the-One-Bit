@@ -20,35 +20,47 @@ Threshold dithering is a method that compares each pixel value against a fixed t
 
 
 Screenshot from Program : 
-![Threshold](images/thresholdScreenshot.png)
+
+![Threshold](images/threshold.png)
 
 Random dithering, the first method made to improve threshold dithering, decides pixel values by making the threshold value random at each pixel. Random dithering produces a very noisy image.
 
 
 Screenshot from Program :
-![Random](images/randomScreenshot.png)
+
+![Random](images/random.png)
 
 ## Ordered Dithering
 
 Ordered dithering dithers using a *dither matrix*. For each pixel, the value of the pattern at the corresponding location is used as a threshold for the pixel.
 
-Halftone dithering
-
-Bayer dithering
+Below is a scale exemplifying how shades of grey are expressed by ordered dither patterns.
 
 ![BayerScale](images/bayerScale.png)
 
+### Halftone Dithering
+
+
+
+Screenshot from Program :
+
+![Halftone](images/halftone.png)
+
+### Bayer Dithering
 
 
 Screenshot from Program (Using 4x4 Bayer Matrix):
+
 ![Bayer4x4](images/bayer4.png)
 
 
 Screenshot from Program (Using 16x16 Bayer Matrix):
+
 ![Bayer16x16](images/bayer16.png)
 
 
 Screenshot from Program (Using 64x64 Bayer Matrix):
+
 ![Bayer64x64](images/bayer64.png)
 
 ## Dependencies
