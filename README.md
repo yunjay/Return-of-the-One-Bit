@@ -117,6 +117,6 @@ Built using vcpkg on Windows.
 
 Images and algorithms are referenced from [wikipedia](https://en.wikipedia.org/wiki/Dither#Algorithms).
 
-3D models from [common-3D-test-models](https://github.com/alecjacobson/common-3d-test-models) uploaded by alecjacobson.
+3D models are from [common-3D-test-models](https://github.com/alecjacobson/common-3d-test-models) uploaded by alecjacobson.
 
 Halftone dithering method from Gomes, Jonas. *Image Processing for Computer Graphics*, 1997.
