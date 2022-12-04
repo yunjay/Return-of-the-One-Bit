@@ -12,6 +12,8 @@
 
 WASD keyboard input for moving the position of the "camera" (viewpoint).
 
+Up/Down/Left/Right arrow keys for moving the view direction of the "camera". 
+
 Graphic interface used with mouse.
 
 ### User Parameters
