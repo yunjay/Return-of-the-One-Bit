@@ -5,6 +5,7 @@
 
 ## Features
 
+*Please Wait for the .gif to load.*
 ![Interface](images/interface.gif)
 
 ### Controls
@@ -26,7 +27,7 @@ Dithering Methods :
 - Halftone Dithering
 - Random Threshold Dithering
 - Threshold Dithering
-- "Original" - Spectrum colored Blinn-Phong rendering (Does not use a binary color scheme.).
+- "Original" - Blinn-Phong rendering (Does not use a binary color scheme.).
 
 ![ChooseMethods](images/chooseMethods.gif)
 
@@ -107,16 +108,16 @@ Screenshot from Program Using 8x8 Bayer Matrix :
 
 Written in C++ using OpenGL and GLFW3.
 
-Used ImGui for interface purposes.
+Used [ImGui](https://github.com/ocornut/imgui) for interface purposes.
 
-Used Assimp for loading 3D models.
+Used [Assimp](https://github.com/assimp/assimp) for loading 3D models.
 
-Built using vcpkg on Windows.
+Built using [vcpkg](https://github.com/microsoft/vcpkg) on Windows.
 
 ## References
 
 Images and algorithms are referenced from [wikipedia](https://en.wikipedia.org/wiki/Dither#Algorithms).
 
-3D models from [common-3D-test-models](https://github.com/alecjacobson/common-3d-test-models) uploaded by alecjacobson.
+3D models are from [common-3D-test-models](https://github.com/alecjacobson/common-3d-test-models) uploaded by alecjacobson.
 
 Halftone dithering method from Gomes, Jonas. *Image Processing for Computer Graphics*, 1997.
