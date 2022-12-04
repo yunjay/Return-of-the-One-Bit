@@ -62,3 +62,5 @@ x64/Debug/imgui_tables.obj
 x64/Debug/imgui_widgets.obj
 x64/Debug/Main.obj
 .DS_Store
+ReturnOfTheOneBit.vcxproj
+ReturnOfTheOneBit.vcxproj.filters
