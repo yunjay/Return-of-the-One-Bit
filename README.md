@@ -1,10 +1,10 @@
 # Return of the One Bit
 
-
 3D rendering showcase of dithering shaders inspired by the game *Return of the Obra Dinn* by Lucas Pope, which features two-color dithering graphics.
 
+![Demo](images/demo.png)
 
-*Please Wait for the .gifs to load.*
+*Please wait for the .gifs to load.*
 
 ## Features
 
