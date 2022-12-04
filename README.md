@@ -107,11 +107,11 @@ Screenshot from Program Using 8x8 Bayer Matrix :
 
 Written in C++ using OpenGL and GLFW3.
 
-Used ImGui for interface purposes.
+Used [ImGui](https://github.com/ocornut/imgui) for interface purposes.
 
-Used Assimp for loading 3D models.
+Used [Assimp](https://github.com/assimp/assimp) for loading 3D models.
 
-Built using vcpkg on Windows.
+Built using [vcpkg](https://github.com/microsoft/vcpkg) on Windows.
 
 ## References
 
