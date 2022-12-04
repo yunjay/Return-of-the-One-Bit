@@ -26,7 +26,7 @@ Dithering Methods :
 - Halftone Dithering
 - Random Threshold Dithering
 - Threshold Dithering
-- "Original" - Spectrum colored Blinn-Phong rendering (Does not use a binary color scheme.).
+- "Original" - Blinn-Phong rendering (Does not use a binary color scheme.).
 
 ![ChooseMethods](images/chooseMethods.gif)
 
