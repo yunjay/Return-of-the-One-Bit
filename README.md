@@ -4,7 +4,7 @@
 3D rendering showcase of dithering shaders inspired by the game *Return of the Obra Dinn* by Lucas Pope, which features two-color dithering graphics.
 
 
-*Please Wait for the .gifs to load.*
+*Please wait for the .gifs to load.*
 
 ## Features
 
