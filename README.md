@@ -5,7 +5,7 @@
 
 ## Features
 
-*Wait for it*
+*Please Wait for the .gif to load.*
 ![Interface](images/interface.gif)
 
 ### Controls
