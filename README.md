@@ -3,14 +3,18 @@
 
 3D rendering showcase of dithering shaders inspired by the game *Return of the Obra Dinn* by Lucas Pope, which features two-color dithering graphics.
 
+
+*Please Wait for the .gifs to load.*
+
 ## Features
 
-*Please Wait for the .gif to load.*
 ![Interface](images/interface.gif)
 
 ### Controls
 
 WASD keyboard input for moving the position of the "camera" (viewpoint).
+
+Up/Down/Left/Right arrow keys for moving the view direction of the "camera". 
 
 Graphic interface used with mouse.
 
