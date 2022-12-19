@@ -96,17 +96,17 @@ The following matrices are used for different sizes of ordered (Bayer) threshold
 
 Screenshot from Program Using 2x2 Bayer Matrix :
 
-![Bayer4x4](images/bayer2x2.png)
+![Bayer2x2](images/bayer2x2.png)
 
 
 Screenshot from Program Using 4x4 Bayer Matrix :
 
-![Bayer16x16](images/bayer4x4.png)
+![Bayer4x4](images/bayer4x4.png)
 
 
 Screenshot from Program Using 8x8 Bayer Matrix :
 
-![Bayer64x64](images/bayer8x8.png)
+![Bayer8x8](images/bayer8x8.png)
 
 ## Dependencies
 
